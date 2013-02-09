@@ -17,7 +17,7 @@ if any(P(:)<0) || any(P(:)>1),
     display('some P are impossible'),
 else display('all P are good')
 end
-subplot(122), spy(A)
+subplot(122), spy(A,5)
 
 % embeddings embeddings
 figure(3), clf, hold on
