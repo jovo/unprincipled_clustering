@@ -53,10 +53,10 @@ for i=1:k
     data=[data Y{i}];
 end
 P=(data'*data);
-dampen=.3;
+dampen=.7;%;.3;
 P=P*dampen;
-P(1:n/2,1:n/2)=(1/dampen)*P(1:n/2,1:n/2);
-P(n/2+1:n, n/2+1:n)=(1/dampen)*P(n/2+1:n,n/2+1:n);
+P(1:n,1:n)=(1/dampen)*P(1:n,1:n);
+P(n+1:2*n, n+1:2*n)=(1/dampen)*P(n+1:2*n,n+1:2*n);
 [max(P(:)), min(P(:))]
 
 A=double(P>rand(n*k,n*k)); % adjacency matrix
@@ -80,9 +80,11 @@ legend('0','1')
 % embeddings embeddings
 % figure(3), clf, hold on
 subplot(122), hold on
-plot(U(1:n/2,1),U(1:n/2,2),'ro')
-plot(U(n/2+1:end,1),U(n/2+1:end,2),'bx')
-
+plot(U(1:n,1),U(1:n,2),'ro')
+plot(U(n+1:end,1),U(n+1:end,2),'bx')
+% plot(U(1:n/2,1),U(1:n/2,2),'ro')
+% plot(U(n/2+1:end,1),U(n/2+1:end,2),'bx')
+% 
 
 
 %% large subspace graph
@@ -107,8 +109,8 @@ for i=1:k
 end
 P=(data'*data);
 P=P*dampen;
-P(1:n/2,1:n/2)=(1/dampen)*P(1:n/2,1:n/2);
-P(n/2+1:n, n/2+1:n)=(1/dampen)*P(n/2+1:n,n/2+1:n);
+P(1:n,1:n)=(1/dampen)*P(1:n,1:n);
+P(n+1:2*n, n+1:2*n)=(1/dampen)*P(n+1:2*n,n+1:2*n);
 [max(P(:)), min(P(:))]
 
 A=double(P>rand(n*k,n*k)); % adjacency matrix
@@ -132,8 +134,10 @@ legend('0','1')
 % embeddings embeddings
 % figure(3), clf, hold on
 subplot(122), hold on
-plot(U(1:n/2,1),U(1:n/2,2),'ro')
-plot(U(n/2+1:end,1),U(n/2+1:end,2),'bx')
+plot(U(1:n,1),U(1:n,2),'ro')
+plot(U(n+1:end,1),U(n+1:end,2),'bx')
+% plot(U(1:n/2,1),U(1:n/2,2),'ro')
+% plot(U(n/2+1:end,1),U(n/2+1:end,2),'bx')
 
 
 
