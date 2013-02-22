@@ -13,8 +13,10 @@ mu = [mu0, mu1];
 sigma = 0.04; % stan dev
 
 % generate graph
-[A, X, X0, X1, P] = GenerateGraph(n,d,mu,sigma);
-plotGraph
+[X] = GenerateLatentPositions(n,d,mu,sigma);
+[A, P] = GenLatentPositionGraph(X);
+
+plotLatentPositionGraph(A,X,1);
 
 %% large sparse graph
 % constants
@@ -28,9 +30,15 @@ mu = [mu0, mu1];
 
 sigma = 0.04; % stan dev
 
-% generate graph
-[A, X, X0, X1, P] = GenerateGraph(n,d,mu,sigma);
-plotGraph
+% % generate graph
+% [A, X, X0, X1, P] = GenerateGraph(n,d,mu,sigma);
+% plotGraph
+
+[X] = GenerateLatentPositions(n,d,mu,sigma);
+[A, P] = GenLatentPositionGraph(X);
+
+plotLatentPositionGraph(A,X,2);
+
 
 %% small subspace graph
 
@@ -106,9 +114,9 @@ for i=1:k
     data=[data Y{i}];
 end
 P=(data'*data);
-P=P*dampen;
-P(1:n/2,1:n/2)=(1/dampen)*P(1:n/2,1:n/2);
-P(n/2+1:n, n/2+1:n)=(1/dampen)*P(n/2+1:n,n/2+1:n);
+% P=P*dampen;
+% P(1:n/2,1:n/2)=(1/dampen)*P(1:n/2,1:n/2);
+% P(n/2+1:n, n/2+1:n)=(1/dampen)*P(n/2+1:n,n/2+1:n);
 [max(P(:)), min(P(:))]
 
 A=double(P>rand(n*k,n*k)); % adjacency matrix
@@ -125,7 +133,7 @@ plot(Y{1}(1,:),Y{1}(2,:),'ro')
 plot(Y{2}(1,:),Y{2}(2,:),'bx')
 theta = linspace(-8*pi,8*pi,200);
 plot(sin(theta),cos(theta),'k')
-% axis([0 1 0 1])
+axis([0 1 0 1])
 legend('0','1')
 
 

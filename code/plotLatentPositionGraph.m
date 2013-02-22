@@ -1,8 +1,13 @@
+function [U, D] = plotLatentPositionGraph(A,X,nFig)
 [U, D] = eigs(A,2); % eigen decomposition
 % [Q,R,E] = qr(A); % rank-revealing QR
 
+[n,d]=size(X);
+X0=X(1:n/2,:);
+X1=X(n/2+1:end,:);
+
 % latent positions
-figure, clf, hold on
+figure(nFig), clf, hold on
 subplot(121), hold on
 plot(X0(:,1),X0(:,2),'ro')
 plot(X1(:,1),X1(:,2),'bx')
