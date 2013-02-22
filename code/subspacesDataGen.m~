@@ -1,11 +1,11 @@
 %% set simulation parameters
 clc; clear all;
 n=100;     % number of samples
-r=2;        % rank of *each* subspace
-k=3;        % number of subspaces
+r=1;        % rank of *each* subspace
+k=2;        % number of subspaces
 c=0;        % mean shift of subspaces
 kr=k*r;     % sum of ranks
-d=10;   % ambient dimension
+d=2;       % ambient dimension
 if d<kr, display('dim is too small'), break, end;
 
 %% generate data
@@ -13,15 +13,15 @@ U={};
 data=[];
 for i=1:k
     U{i}=orth(randn(d,r));
-    if i==2,
-        U{i}=0.1*randn(d,r)+U{1};
-        U{i}=orth(U{i});
-    end
+%     if i==2,
+%         U{i}=0.1*randn(d,r)+U{1};
+%         U{i}=orth(U{i});
+%     end
     Y{i}=U{i}*(c*randn(r,1)*ones(1,n)+randn(r,n));
     data=[data Y{i}];
 end
 
-% project data on true low-dimensional subspaces
+%% project data on true low-dimensional subspaces
 UU=[];
 for i=1:k
     UU=[UU U{i}];
@@ -51,24 +51,27 @@ end
 print('-dpng',['true2d_r', num2str(r),'_k', num2str(k),'_d',num2str(d),'_n',num2str(n)])
 
 %% plot truth in 3d
+% WARNING: note that this makes nchoosek(kr,3) plots!!!!
+
+nplots=nchoosek(kr,3); 
+factors=factor(nplots);
+nrows=prod(factors(1:length(factors)-1));
+ncols=factors(end);
 figure(2), clf
-for ll=1:k,
-    subplot(221), hold on
-    plot3(proj(n*(ll-1)+1:ll*n,1),proj(n*(ll-1)+1:ll*n,2),proj(n*(ll-1)+1:ll*n,3),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('1'), ylabel('2'), zlabel('3')
-    subplot(222), hold on
-    plot3(proj(n*(ll-1)+1:ll*n,1),proj(n*(ll-1)+1:ll*n,2),proj(n*(ll-1)+1:ll*n,4),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('1'), ylabel('2'), zlabel('4')
-    subplot(223), hold on
-    plot3(proj(n*(ll-1)+1:ll*n,1),proj(n*(ll-1)+1:ll*n,3),proj(n*(ll-1)+1:ll*n,4),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('1'), ylabel('3'), zlabel('4')
-    subplot(224), hold on
-    plot3(proj(n*(ll-1)+1:ll*n,2),proj(n*(ll-1)+1:ll*n,3),proj(n*(ll-1)+1:ll*n,4),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('2'), ylabel('3'), zlabel('4')
+ll=0;
+for ii=1:kr-2
+    for jj=ii+1:kr-1
+        for kk=jj+1:kr
+            ll=ll+1;
+            subplot(nrows,ncols,ll),  grid on, hold on
+            for mm=1:k
+                plot3(proj(n*(mm-1)+1:mm*n,ii),proj(n*(mm-1)+1:mm*n,jj),proj(n*(mm-1)+1:mm*n,kk),...
+                    '.','MarkerEdgeColor',colors{mm},'MarkerFaceColor',colors{mm}),
+            end
+            xlabel(num2str(ii)), ylabel(num2str(jj)), zlabel(num2str(kk))
+            set(gca,'XTick',[],'YTick',[])
+        end
+    end
 end
 print('-dpng',['true3d_r', num2str(r),'_k', num2str(k),'_d',num2str(d),'_n',num2str(n)])
 
@@ -97,50 +100,27 @@ end
 print('-dpng',['spectral2d_r', num2str(r),'_k', num2str(k),'_d',num2str(d),'_n',num2str(n)])
 
 %% plot optimal linear embedding in 3d
-figure(4), clf,
-for ll=1:k,
-    subplot(221), hold on
-    plot3(v(n*(ll-1)+1:ll*n,1),v(n*(ll-1)+1:ll*n,2),v(n*(ll-1)+1:ll*n,3),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('1'), ylabel('2'), zlabel('3')
-    subplot(222), hold on
-    plot3(v(n*(ll-1)+1:ll*n,1),v(n*(ll-1)+1:ll*n,2),v(n*(ll-1)+1:ll*n,4),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('1'), ylabel('2'), zlabel('4')
-    subplot(223), hold on
-    plot3(v(n*(ll-1)+1:ll*n,1),v(n*(ll-1)+1:ll*n,3),v(n*(ll-1)+1:ll*n,4),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('1'), ylabel('3'), zlabel('4')
-    subplot(224), hold on
-    plot3(v(n*(ll-1)+1:ll*n,2),v(n*(ll-1)+1:ll*n,3),v(n*(ll-1)+1:ll*n,4),...
-        '.','MarkerEdgeColor',colors{ll},'MarkerFaceColor',colors{ll}), grid on
-    xlabel('2'), ylabel('3'), zlabel('4')
-end
-print('-dpng',['spectral3d_r', num2str(r),'_k', num2str(k),'_d',num2str(d),'_n',num2str(n)])
+% WARNING: note that this makes nchoosek(kr,3) plots!!!!
 
-%% 
 
-nplots=nchoosek(kr,3); % the rest of the code only works for kr=3
-figure(5), clf
+nplots=nchoosek(kr,3); 
+factors=factor(nplots);
+nrows=prod(factors(1:length(factors)-1));
+ncols=factors(end);
+figure(4), clf
 ll=0;
-for ii=1:nplots-2
-    for jj=ii:nplots-1
-        for kk=jj:nplots
+for ii=1:kr-2
+    for jj=ii+1:kr-1
+        for kk=jj+1:kr
             ll=ll+1;
-             subplot(5,4,ll), hold on
-             mm=mod(ll,k)+1;
+            subplot(nrows,ncols,ll),  grid on, hold on
+            for mm=1:k
                 plot3(v(n*(mm-1)+1:mm*n,ii),v(n*(mm-1)+1:mm*n,jj),v(n*(mm-1)+1:mm*n,kk),...
-        '.','MarkerEdgeColor',colors{mm},'MarkerFaceColor',colors{mm}), grid on
-       xlabel(num2str(ii)), ylabel(num2str(jj)), zlabel(num2str(kk))
+                    '.','MarkerEdgeColor',colors{mm},'MarkerFaceColor',colors{mm}),
+            end
+            xlabel(num2str(ii)), ylabel(num2str(jj)), zlabel(num2str(kk))
+            set(gca,'XTick',[],'YTick',[])
         end
     end
 end
-
-%%
-% figure(5), clf
-% for j=1:kr
-%     subplot(r,k,j),
-%     if j>
-%
-%     plot3(v(:,1),v(:,2),v(:,3),'r.')
-% end
+print('-dpng',['spectral3d_r', num2str(r),'_k', num2str(k),'_d',num2str(d),'_n',num2str(n)])

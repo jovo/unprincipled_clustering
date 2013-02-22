@@ -53,7 +53,7 @@ for i=1:k
     data=[data Y{i}];
 end
 P=(data'*data);
-dampen=.5;
+dampen=.3;
 P=P*dampen;
 P(1:n/2,1:n/2)=(1/dampen)*P(1:n/2,1:n/2);
 P(n/2+1:n, n/2+1:n)=(1/dampen)*P(n/2+1:n,n/2+1:n);
