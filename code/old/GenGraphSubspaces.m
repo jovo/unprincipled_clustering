@@ -1,4 +1,4 @@
-function [A, X, X0, X1, P] = GenerateGraph(n,d,mu,sigma)
+function [A, X, X0, X1, P] = GenGraphSubspaces(n,d,mu,sigma)
 % n: number vertices
 % d: # dimensions of latent positions
 
