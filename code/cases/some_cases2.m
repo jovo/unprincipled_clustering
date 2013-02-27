@@ -24,16 +24,16 @@ for i = 1:4;
     switch i
         case 1 % small sparse graph
             n = 100; % # vertices
-            [X, A, U, D] = GenEmbedPlotGraph(n,rdpgparams,'RRDPG',1);
+            [X, A, U, D] = GenEmbedPlotGraph(n,rdpgparams,'RRDPG',i);
         case 2 % large sparse graph
             n = 5000;
-            [X, A, U, D] = GenEmbedPlotGraph(n,rdpgparams,'RRDPG',2);
+            [X, A, U, D] = GenEmbedPlotGraph(n,rdpgparams,'RRDPG',i);
         case 3  % small subspace graph
             n=200;                 % number of vertices
-            [X, A, U, D] = GenEmbedPlotGraph(n,subparams,'Subspace',3);
+            [X, A, U, D] = GenEmbedPlotGraph(n,subparams,'Subspace',i);
         case 4  % large subspace graph
             n=5000;     % number of samples
-            [X, A, U, D] = GenEmbedPlotGraph(n,subparams,'Subspace',4);
+            [X, A, U, D] = GenEmbedPlotGraph(n,subparams,'Subspace',i);
     end
 end
 
