@@ -1,4 +1,4 @@
-function [clusterind] = kSubspacesLloyd(X,k,d,maxIter)
+function [clusterind, Uk] = kSubspacesLloyd(X,k,d,maxIter)
 % X is the matrix of data vectors (columns).
 % k is the number of clusters.
 % d is the dimension of clusters.
