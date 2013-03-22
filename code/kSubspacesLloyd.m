@@ -17,11 +17,11 @@ Uk=nnfisuimd(X,k,d);
 
 for iter=1:maxIter %number of k-subspace iterations
     
-    if mod(iter,10)==0 || n*m > 10000
+%     if mod(iter,10)==0 || n*m > 10000
     fprintf('%d ',iter);
-    end
+%     end
     
-    
+    tic
     % Estimate cluster assignments.
     for j=1:n
         x = X(:,j);
@@ -34,15 +34,16 @@ for iter=1:maxIter %number of k-subspace iterations
         end
         [~, assig(j)] = min(residual);
     end
-
+    toc
     
     % Estimate subspaces
-
+    tic
     for i=1:k
         Y = X(:,(assig==i));
         [U, ~, ~] = svd(Y);
         Uk{i} = U(:,1:d);
     end
+    toc
     
 end
 
