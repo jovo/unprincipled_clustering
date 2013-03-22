@@ -31,7 +31,10 @@ Xhat=[U*D^(1/2) V*D^(1/2)];
 
 [clusterind Uk] = kSubspacesLloyd(Xhat',k,r,20);
 
+trueind=[zeros(n,1), ones(n,1)]+1; 
+
 subplot(131), imagesc(data), colorbar
 subplot(132), imagesc(A), colorbar
 subplot(133), imagesc(Xhat), colorbar
 
+sum((clusterind'-trueind).^2)
