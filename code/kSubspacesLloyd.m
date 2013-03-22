@@ -4,7 +4,7 @@ function [clusterind, Uk] = kSubspacesLloyd(X,k,d,maxIter)
 % d is the dimension of clusters.
 % maxIter is the number of subspace clustering iterations.
 
-[m, ~] = size(X);
+[m, n] = size(X);
 
 % tX=zeros(size(X));
 % for j=1:n
