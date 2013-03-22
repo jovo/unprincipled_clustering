@@ -1,4 +1,4 @@
-function [clusterind] = kSubspacesLloyd(X,k,d,maxIter)
+function [clusterind Uk] = kSubspacesLloyd(X,k,d,maxIter)
 % Cluster incomplete data vectors into subspaces.
 %
 % incompleteDataClustering(X,goodidxMat,goodidxVec,k,d,step_size,maxIter)

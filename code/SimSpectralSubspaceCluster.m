@@ -23,5 +23,15 @@ for i=1:k
 end
 
 A=data'*data;
-subplot(121), imagesc(data), colorbar
-subplot(122), imagesc(A), colorbar
+A(A<0)=0;
+A(A>1)=1;
+
+[U D V] = svds(A,4);
+Xhat=[U*D^(1/2) V*D^(1/2)];
+
+[clusterind Uk] = kSubspacesLloyd(Xhat',k,r,20);
+
+subplot(131), imagesc(data), colorbar
+subplot(132), imagesc(A), colorbar
+subplot(133), imagesc(Xhat), colorbar
+
