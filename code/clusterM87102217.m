@@ -7,6 +7,12 @@ tic
 [u,s,v]=svds(fibergraph,2);
 time.svd=toc;
 
+clear fibergraph
+
+save('../data/M87102217_embedding','u','s','v')
+%%
+load('../data/M87102217_embedding.mat')
+
 
 Xhat=u';
 tic
