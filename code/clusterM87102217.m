@@ -25,7 +25,7 @@ time.kmeans=toc;
 
 % min(sum((L-trueind).^2),sum((-L-trueind).^2))/(2*n)
 
-save('clustered','clusterind','Uk','u','s','v','L','C','time')
+save('../data/clustered','clusterind','Uk','u','s','v','L','C','time')
 
 figure;
 subplot(311);

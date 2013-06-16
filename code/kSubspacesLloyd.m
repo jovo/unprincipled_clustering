@@ -1,4 +1,4 @@
-function [clusterind, Uk] = kSubspacesLloyd(X,k,d,maxIter)
+function [clusterind, Uk, tocs] = kSubspacesLloyd(X,k,d,maxIter)
 % X is the matrix of data vectors (columns).
 % k is the number of clusters.
 % d is the dimension of clusters.
@@ -43,8 +43,8 @@ for iter=1:maxIter %number of k-subspace iterations
         [U, ~, ~] = svd(Y);
         Uk{i} = U(:,1:d);
     end
-    toc
-    
+    tocs(iter)=toc;
+    save('../data/ksubspace','clusterind','Uk','tocs')
 end
 
 
