@@ -17,9 +17,10 @@ function [L,C] = kmeanspp(X,k)
 
 L = [];
 L1 = 0;
-
+i=0;
 while length(unique(L)) ~= k
-    
+    i=i+1;
+    tic
     C = X(:,1+round(rand*(size(X,2)-1)));
     L = ones(1,size(X,2));
     for i = 2:k
@@ -35,6 +36,8 @@ while length(unique(L)) ~= k
         for i = 1:k, l = L==i; C(:,i) = sum(X(:,l),2)/sum(l); end
         [tmp,L] = max(bsxfun(@minus,2*real(C'*X),dot(C,C).'),[],1);
     end
+    tocs(i)=toc;
+    save('../data/kmeans','L','C','tocs')
     
 end
 
