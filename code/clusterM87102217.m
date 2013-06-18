@@ -1,17 +1,17 @@
 
-clear all;
-clc;
-close all;
-load('../data/M87102217_fiber.mat')
-tic
-[u,s,v]=svds(fibergraph,2);
-time.svd=toc;
-
-clear fibergraph
-
-save('../data/M87102217_embedding','u','s','v')
+% clear all;
+% clc;
+% close all;
+% load('../data/M87102217_fiber.mat')
+% tic
+% [u,s,v]=svds(fibergraph,2);
+% time.svd=toc;
+% 
+% clear fibergraph
+% 
+% save('../data/M87102217_embedding','u','s','v')
 %%
-load('../data/M87102217_embedding.mat')
+load('../data/M87102217_eigvect.mat')
 
 
 Xhat=u';
@@ -32,6 +32,12 @@ time.kmeans=toc;
 % min(sum((L-trueind).^2),sum((-L-trueind).^2))/(2*n)
 
 save('../data/clustered','clusterind','Uk','u','s','v','L','C','time')
+%%
+
+% load('../data/clustered');
+%%
+Xhat=u';
+
 
 figure;
 subplot(311);
@@ -49,7 +55,7 @@ idx=find(L==2);
 plot(Xhat(1,idx),Xhat(2,idx),'bo');
 
 load('../data/M87102217concomp.mat')
-subplot(312);
+subplot(313);
 idx=find(lcc < 100);
 plot(Xhat(1,idx),Xhat(2,idx),'ro');
 hold on;
