@@ -51,7 +51,7 @@ for iter=1:maxIter %number of k-subspace iterations
         [U, ~, ~] = svds(Y,d);
         Uk{i} = U(:,1:d);
     end
-    tocs(iter)=toc;
+    tocs(iter)=toc
     save('../data/ksubspace','clusterind','Uk','tocs')
 end
 

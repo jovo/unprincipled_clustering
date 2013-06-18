@@ -1,4 +1,4 @@
-function [L,C] = kmeanspp(X,k)
+function [L,C tocs] = kmeanspp(X,k)
 %KMEANS Cluster multivariate data using the k-means++ algorithm.
 %   [L,C] = kmeans(X,k) produces a 1-by-size(X,2) vector L with one class
 %   label per column in X and a size(X,1)-by-k matrix C containing the
@@ -36,7 +36,7 @@ while length(unique(L)) ~= k
         for i = 1:k, l = L==i; C(:,i) = sum(X(:,l),2)/sum(l); end
         [tmp,L] = max(bsxfun(@minus,2*real(C'*X),dot(C,C).'),[],1);
     end
-    tocs(i)=toc;
+    tocs(i)=toc
     save('../data/kmeans','L','C','tocs')
     
 end

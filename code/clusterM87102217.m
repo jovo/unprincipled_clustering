@@ -16,8 +16,8 @@ load('../data/M87102217_eigvect.mat')
 
 Xhat=u';
 tic
-[clusterind Uk] = kSubspacesLloyd(Xhat,2,1,20);
-time.ksubspace=toc;
+[clusterind Uk tocs_ksubspaces] = kSubspacesLloyd(Xhat,2,1,20);
+time.ksubspace=toc
 % clusterind=clusterind-1.5;
 
 % trueind=[zeros(1,nn), ones(1,nn)]-.5; 
@@ -25,13 +25,13 @@ time.ksubspace=toc;
 % min(sum((clusterind-trueind).^2),sum((-clusterind-trueind).^2))/(n)
 
 tic
-[L,C] = kmeanspp(Xhat,2);
-time.kmeans=toc;
+[L,C, tocs_kmeans] = kmeanspp(Xhat,2);
+time.kmeans=toc
 % L=L-1.5;
 
 % min(sum((L-trueind).^2),sum((-L-trueind).^2))/(2*n)
 
-save('../data/clustered','clusterind','Uk','u','s','v','L','C','time')
+save('../data/clustered','clusterind','Uk','u','s','v','L','C','time','tocs_ksubspaces','tocs_kmeans')
 %%
 
 % load('../data/clustered');
