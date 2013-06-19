@@ -11,7 +11,8 @@
 % 
 % save('../data/M87102217_embedding','u','s','v')
 %%
-load('../data/M87102217_eigvect.mat')
+% load('../data/M87102217_eigvect.mat')
+% load('../data/M87102217_embedding')
 
 
 Xhat=u';
@@ -31,12 +32,12 @@ time.kmeans=toc
 
 % min(sum((L-trueind).^2),sum((-L-trueind).^2))/(2*n)
 
-save('../data/clustered','clusterind','Uk','u','s','v','L','C','time','tocs_ksubspaces','tocs_kmeans')
+save('../data/clustered'); %,'clusterind','Uk','u','s','v','L','C','time','tocs_ksubspaces','tocs_kmeans')
 %%
 
 % load('../data/clustered');
 %%
-Xhat=u';
+% Xhat=u';
 
 
 figure;
