@@ -1,0 +1,222 @@
+\documentclass[times,11pt]{article} %%Margins must be 1 inch, top & bottom 1 in%%
+\usepackage[small,compact]{titlesec}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+
+\marginparwidth 0pt
+\oddsidemargin  0pt
+\evensidemargin  0pt
+\marginparsep 0pt
+\topmargin   -.50in
+\textwidth   6.5in
+\textheight  9in
+
+
+
+\usepackage[pdftex]{graphicx}
+\bibliographystyle{unsrt}
+\usepackage{url}
+
+\usepackage[usenames]{color}
+\definecolor{plum}  {rgb}{.6,0,.6}
+\definecolor{forest}  {rgb}{0,.6,0}
+\definecolor{midnight}  {rgb}{0,0,.8}
+\usepackage[pdftex,plainpages=false,pdfpagelabels,colorlinks=true,urlcolor=midnight,linkcolor=midnight,citecolor=forest]{hyperref}
+
+%\RequirePackage[colorlinks,linkcolor=forest,citecolor=blue,urlcolor=blue]{hyperref}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm,color,bm}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{wrapfig}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{conjecture}{Conjecture}
+
+%\newcommand{\yao}[1]{{\color{blue}{#1}}}
+%\newcommand{\becca}[1]{{\color{black}{#1}}}
+%\newcommand{\laura}[1]{{\color{cyan}{#1}}}
+%\newcommand{\todo}[1]{{\color{red}{#1}}}
+\newcommand{\cf}{{\em cf.}}
+\newcommand{\cX}{\mathcal{X}}
+\def\htheta{{\widehat{M}}}
+\def\btheta{\boldsymbol{M}}
+\def\bhtheta{\widehat{\btheta}}
+%\def\bx{\bm{x}}
+\def\cF{{\cal F}}
+\def\cR{{\cal R}}
+\def\cL{{\cal L}}
+\def\grad{\nabla}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\Ave}[1]{\left\langle #1 \right\rangle}
+\newcommand{\ave}[1]{\langle #1 \rangle}
+
+\def\ie{{\em i.e.,~}}
+\def\eg{{\em e.g.,~}}
+\def\cf{{\em cf.,~}}
+\def\ea{{\em et al.~}}
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\newcommand{\fixme}{\textcolor{red}}
+\newcommand{\laura}{\textcolor{magenta}}
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Subspace Methods for Massive and Messy Data}
+
+\author{Laura Balzano}
+\def \E{\mathbb E}
+\def \Expect{\mathbb E}
+\def \1{\mathbf 1}
+\def \P{\mathrm{Pr}}
+\def \R{\mathbb{R}}
+\def \S{\mathcal{S}}
+\def \cA{\mathcal{A}}
+\def \N{p}
+\def \reals{\mathbb{R}}
+\newcommand{\deq}{\mathrel{\stackrel{\scriptscriptstyle\Delta}{=}}}
+
+
+\newenvironment{squishlist}
+{   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{2pt}      \setlength{\parsep}{2pt}
+      \setlength{\topsep}{0pt}       \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1.5em} \setlength{\labelwidth}{1em}
+      \setlength{\labelsep}{0.5em} } }
+      {\end{list}}
+      
+\newenvironment{squishlist2}
+{   \begin{list}{$\blacktriangleright$}
+    { \setlength{\itemsep}{2pt}      \setlength{\parsep}{2pt}
+      \setlength{\topsep}{0pt}       \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1.5em} \setlength{\labelwidth}{1em}
+      \setlength{\labelsep}{0.5em} } }
+      {\end{list}}
+
+
+% make the title area
+%\maketitle
+
+%\begin{center}
+%{\bf \Large PROJECT SUMMARY}   
+%\vspace{0.05in}
+%\hrule
+%\end{center}
+
+\renewcommand\thepage{C-1}
+
+\paragraph{Summary of BRAIN Research Ideas.} Intro here, why it's important to study the brain.
+
+\paragraph{Subspace Clustering}
+
+Modeling data as a union of subspaces is a simple and flexible model that fits well to the context of \laura{what are our data again?}  Algorithmically, the problem of estimating the union of subspaces from data defines the problem of \emph{Subspace Clustering}, or clustering vectors into groups that lie in or near the same subspace. A union of $k$ $r$-dimensional subspaces itself spans a subspace which has dimension at most $kr$. However, the union of subspaces model is often more flexible than the $kr$-dimensional subspace. Consider the illustration in Figure~\ref{fig:unionsum}; though the two lines (two one-dimensional subspaces) are a simpler model than the two-dimensional plane, the set they define is non-convex.
+
+
+\begin{wrapfigure}{r}{0.42\textwidth}
+%\begin{figure}[htb]
+\centering
+\includegraphics[width=.4\textwidth]{figs/unionspic}
+\caption{\small Illustration of two 1-d subspaces and one 2-d subspace; though the two pink lines (two one-dimensional subspaces) are a simpler model than the yellow two-dimensional plane, the set they define is non-convex.}
+\label{fig:unionsum}
+%\end{figure}
+\end{wrapfigure}
+
+
+Let $X$ be a \laura{what size} data matrix, where the rows represent \laura{what} and the columns \laura{what}. 
+The goal of subspace clustering is to infer the underlying subspaces from $X$ and to cluster the columns of $X$ according to the subspaces. This would in turn give us an understanding of potential clusters of connectivity causing activity in the brain, cite here. From our preliminary results, subspace clustering is a much better tool for clustering activity regions than spectral clustering, which is the state-of-the-art approach cite. There are three open problems that we wish to address. 
+
+\begin{enumerate}
+\item Adapting the brain region clustering problem to the framework of subspace clustering, and studying the similarities and differences to the spectral clustering approach.
+\item Analyzing the subspace clustering algorithm in this context, which we expect to result in both algorithmic and statistical convergence guarantees.
+\item \laura{Something else here, like perhaps dealing realities of actual brain data, applying it, maybe missing data and corruptions, etc.}
+\end{enumerate}
+
+\section{Spectral Clustering versus Subspace Clustering}
+
+This is our first theoretical contribution. The connections are clear in certain problems, give example.
+
+\section{Subspace Clustering Analysis} Understanding the theoretical properties of the subspace clustering algorithm is crucial to creating better statistical tests for brain connectivity. The current state-of-the-art algorithms rely heavily on \laura{more here and...}
+
+
+\paragraph{Algorithmic Analysis} The subspace clustering problem is non-convex and finding an optimal solution to the subspace clustering problem is NP-hard \cite{vidaltutorial}. However, it is believed that under mild conditions separating the subspaces, properly initialized simple algorithms like the EM algorithm should provably succeed in identifying the true subspaces underlying the data. A second theoretical contribution of our work will be to pursue this theorem of algorithmic global convergence.
+
+\laura{Laura will talk here about avenues we could pursue. }
+
+\paragraph{Statistical Analysis} Consistency, of course.
+
+
+
+\section{Missing-Data Subspace Clustering (or general aspects of the reality of data)}
+
+
+Low-rank matrix completion allows one to estimate a single subspace from incomplete data, and this work has recently been extended for the subspace clustering problem~\cite{hrmc, balzano2012ssp, pimentel2014}. However, the algorithm analyzed in~\cite{hrmc} is computationally demanding and intractable in the number of clusters. While the algorithms in~\cite{balzano2012ssp, pimentel2014} are computationally efficient, they have no convergence guarantees. 
+
+
+ 
+%The main algorithmic contribution of the paper is a new, computationally-efficient EM algorithm for subspace clustering with missing data.  Experiments with real and synthetic data show that the EM algorithm performs better than existing methods. Moreover, the experiments show that the algorithm's performance breaks down precisely at the theoretical sample complexity bounds. 
+%
+%Subspace clustering with missing data shares aspects of {\em subspace clustering} \cite{vidaltutorial, lbfcvpr2010, candesRSC} and {\em low-rank matrix completion}~\cite{mcRecht}, and the combination of these areas is the central perspective of prior theoretical analysis of the problem (also referred to as {\em high-rank matrix completion}) \cite{aistatsHRMC}.  The main assumptions used in the theoretical analysis are essentially the same as to those in \cite{aistatsHRMC}. Specifically, the columns of $X$  are drawn from a non-atomic distribution supported on a union of low-dimensional subspaces, entries in the columns are missing uniformly at random, and the subspaces are incoherent with the canonical basis (precise statements of our assumptions are given in the next section).  The main theoretical result of this paper shows that, under these assumptions, subspace clustering with missing data is possible from far fewer observations than the (often impractically) large number required by the algorithm in \cite{aistatsHRMC}.
+%
+%In addition to the algorithm  in \cite{aistatsHRMC}, other heuristic procedures have been proposed without theoretical support \cite{balzanoszlam12,muellere11}.  For problems with significant fractions of missing data and practically relevant sample sizes, the {\em k-subspaces} algorithm in \cite{balzanoszlam12}, which takes the algorithm of~\cite{Bradley00} and generalizes it to handle missing data, has been shown to be particularly effective.  This paper proposes a new EM algorithm for subspace clustering with missing data, which can be viewed as a generalization of \cite{bishop98} to handle missing data and/or a generalization of \cite{jordan94} to low-rank covariances.  The EM algorithm is computationally-efficient (just slightly more intensive than the greedy method of \cite{balzanoszlam12}) and outperforms the algorithms in \cite{balzanoszlam12,aistatsHRMC} in experiments with real and synthetic data.  Furthermore, our main theoretical result enables one to certify the result of {\em any} subspace clustering algorithm by checking the residual error on the observed data. 
+
+
+ 
+
+\newpage
+\setcounter{page}{1}
+\renewcommand\thepage{F-\arabic{page}}
+\bibstyle{alpha}
+\bibliography{pecase}
+
+% that's all folks
+\end{document}
+
+

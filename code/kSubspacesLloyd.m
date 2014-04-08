@@ -52,7 +52,7 @@ for iter=1:maxIter %number of k-subspace iterations
         Uk{i} = U(:,1:d);
     end
     tocs(iter)=toc;
-    save('../data/ksubspace','clusterind','Uk','tocs')
+    save('../data/ksubspace','assig','Uk','tocs')
 end
 
 
