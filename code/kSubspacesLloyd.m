@@ -20,7 +20,8 @@ for iter=1:maxIter %number of k-subspace iterations
     %     if mod(iter,10)==0 || n*m > 10000
 %     fprintf('\nIter #%d ',iter);
     %     end
-    
+
+    tic
     % Estimate cluster assignments.
     for j=1:n
 
@@ -45,7 +46,6 @@ for iter=1:maxIter %number of k-subspace iterations
     
     
     % Estimate subspaces
-    tic
     for i=1:k
         Y = X(:,(assig==i));
         [U, ~, ~] = svds(Y,d);

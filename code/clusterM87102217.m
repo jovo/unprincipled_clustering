@@ -1,23 +1,34 @@
 
-% clear all;
-% clc;
-% close all;
-% load('../data/M87102217_fiber.mat')
-% tic
-% [u,s,v]=svds(fibergraph,2);
-% time.svd=toc;
-% 
-% clear fibergraph
-% 
-% save('../data/M87102217_embedding','u','s','v')
-%%
-% load('../data/M87102217_eigvect.mat')
-% load('../data/M87102217_embedding')
+clear all;
+clc;
+close all;
+
+%% load data
+
+thingy = 'eigen2'; % which thingy to load
+switch thingy
+    case 'graph' % whole graphs
+        load('../data/M87102217_fiber.mat')
+        tic
+        [u,s,v]=svds(fibergraph,2);
+        time.svd=toc;       
+        clear fibergraph
+        save('../data/M87102217_embedding','u','s','v')
+        
+    case 'eigen100' % top 100 eigenvectors of lcc
+        load('../data/M87102217_eigvect.mat')
+        
+    case 'eigen2' % top 2 eigvectors of lcc
+        load('../data/M87102217_embedding')
+        
+end
+
+%%  cluster
 
 
 Xhat=u';
 tic
-[clusterind Uk tocs_ksubspaces] = kSubspacesLloyd(Xhat,2,1,20);
+[clusterind Uk tocs_ksubspaces] = kSubspacesLloyd(Xhat,70,1,20);
 time.ksubspace=toc
 % clusterind=clusterind-1.5;
 
@@ -26,7 +37,7 @@ time.ksubspace=toc
 % min(sum((clusterind-trueind).^2),sum((-clusterind-trueind).^2))/(n)
 
 tic
-[L,C, tocs_kmeans] = kmeanspp(Xhat,2);
+[L,C, tocs_kmeans] = kmeanspp(Xhat,70);
 time.kmeans=toc
 % L=L-1.5;
 
