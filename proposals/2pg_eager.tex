@@ -102,13 +102,10 @@
 \newcommand{\fixme}{\textcolor{red}}
 \newcommand{\laura}{\textcolor{magenta}}
 
-
-\begin{document}
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
 \title{\vspace{-50pt}Connectome Coding}
-
 \author{Laura Balzano \& Joshua T.~Vogelstein}
 \date{}
 \def \E{\mathbb E}
@@ -140,6 +137,7 @@
       {\end{list}}
 
 
+\begin{document}
 
 \renewcommand\thepage{C-1}
 
@@ -162,8 +160,6 @@ Evidence is building that most psychiatric disorders are fundamentally ``connect
 
 Neural coding is a rich field devoted to understanding the relationship between neural \emph{activity} and perception.  By analogy, connectome coding will become a bourgeoning field devoted to understanding the relationship between neural \emph{connectivity} and experience.  Indeed, since the days of Hebb \cite{??}, neuroscientists have conjectured that memories and experiences are stored in the connectivity patterns of the brain.  If the brain stores memories in the physical connections, then it can be free to exhibit whatever pattern it so desires, without fearing a radical reconfiguration of its memories.  On the other hand, if experience is somehow stored in ongoing activity, a sudden change of state (for example, by a seizure), could erase all history, like a etch-a-sketch.   Thus, we are motivated to build and understand models of brain connectivity. 
 
-
-
 \begin{wrapfigure}{r}{0.42\textwidth}
 %\begin{figure}[htb]
 \centering
@@ -172,8 +168,6 @@ Neural coding is a rich field devoted to understanding the relationship between 
 \label{fig:unionsum}
 %\end{figure}
 \end{wrapfigure}
-
-
 
 \clearpage
 \paragraph{Aims}
@@ -189,8 +183,6 @@ Neural coding is a rich field devoted to understanding the relationship between 
  
 
 \newpage
-
-
 \paragraph{Subspace Clustering}
 
 Modeling data as a union of subspaces is a simple and flexible model that fits well to the context of brain-graphs.  Algorithmically, the problem of estimating the union of subspaces from data defines the problem of \emph{Subspace Clustering}, or clustering vectors into groups that lie in or near the same subspace. 
@@ -198,6 +190,17 @@ Modeling data as a union of subspaces is a simple and flexible model that fits w
 
 Let $A_G$ be a $n \times n$ adjacency matrix of graph $G$, where $A_{uv}=1$ iff $(u \sim v) \in \mathcal{E}_G$. 
 The goal of subspace clustering is to jointly infer the underlying subspaces from $A$ and to cluster the vertices of $A$ according to their corresponding subspaces. This would in turn give us an understanding of potential clusters of connectivity. From our preliminary results, subspace clustering is a much better tool for clustering connectivity than spectral clustering of the graph or activity, or anatomical clustering, which is the state-of-the-art approach \cite{}. There are three open problems that we wish to address.
+
+
+Let $X$ be a \laura{what size} data matrix, where the rows represent \laura{what} and the columns \laura{what}. 
+The goal of subspace clustering is to infer the underlying subspaces from $X$ and to cluster the columns of $X$ according to the subspaces. This would in turn give us an understanding of potential clusters of connectivity causing activity in the brain, cite here. From our preliminary results, subspace clustering is a much better tool for clustering activity regions than spectral clustering, which is the state-of-the-art approach cite. There are three open problems that we wish to address. 
+
+\begin{enumerate}
+\item Adapting the brain region clustering problem to the framework of subspace clustering, and studying the similarities and differences to the spectral clustering approach.
+\item Analyzing the subspace clustering algorithm in this context, which we expect to result in both algorithmic and statistical convergence guarantees.
+\item \laura{Something else here, like perhaps dealing realities of actual brain data, applying it, maybe missing data and corruptions, etc.}
+\end{enumerate}
+
 
 \section{Spectral Clustering versus Subspace Clustering}
 
@@ -230,6 +233,17 @@ Low-rank matrix completion allows one to estimate a single subspace from incompl
 
 
 
+ 
+%The main algorithmic contribution of the paper is a new, computationally-efficient EM algorithm for subspace clustering with missing data.  Experiments with real and synthetic data show that the EM algorithm performs better than existing methods. Moreover, the experiments show that the algorithm's performance breaks down precisely at the theoretical sample complexity bounds. 
+%
+%Subspace clustering with missing data shares aspects of {\em subspace clustering} \cite{vidaltutorial, lbfcvpr2010, candesRSC} and {\em low-rank matrix completion}~\cite{mcRecht}, and the combination of these areas is the central perspective of prior theoretical analysis of the problem (also referred to as {\em high-rank matrix completion}) \cite{aistatsHRMC}.  The main assumptions used in the theoretical analysis are essentially the same as to those in \cite{aistatsHRMC}. Specifically, the columns of $X$  are drawn from a non-atomic distribution supported on a union of low-dimensional subspaces, entries in the columns are missing uniformly at random, and the subspaces are incoherent with the canonical basis (precise statements of our assumptions are given in the next section).  The main theoretical result of this paper shows that, under these assumptions, subspace clustering with missing data is possible from far fewer observations than the (often impractically) large number required by the algorithm in \cite{aistatsHRMC}.
+%
+%In addition to the algorithm  in \cite{aistatsHRMC}, other heuristic procedures have been proposed without theoretical support \cite{balzanoszlam12,muellere11}.  For problems with significant fractions of missing data and practically relevant sample sizes, the {\em k-subspaces} algorithm in \cite{balzanoszlam12}, which takes the algorithm of~\cite{Bradley00} and generalizes it to handle missing data, has been shown to be particularly effective.  This paper proposes a new EM algorithm for subspace clustering with missing data, which can be viewed as a generalization of \cite{bishop98} to handle missing data and/or a generalization of \cite{jordan94} to low-rank covariances.  The EM algorithm is computationally-efficient (just slightly more intensive than the greedy method of \cite{balzanoszlam12}) and outperforms the algorithms in \cite{balzanoszlam12,aistatsHRMC} in experiments with real and synthetic data.  Furthermore, our main theoretical result enables one to certify the result of {\em any} subspace clustering algorithm by checking the residual error on the observed data. 
+
+
+ 
+
+\newpage
 \setcounter{page}{1}
 \renewcommand\thepage{F-\arabic{page}}
 \bibstyle{alpha}
