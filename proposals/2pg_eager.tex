@@ -139,12 +139,13 @@
 
 \begin{document}
 
-\renewcommand\thepage{C-1}
+% \renewcommand\thepage{C-1}
 
 
 \maketitle
 
 \subsubsection*{Challenge, Impact and Innovation}
+
 
 A human brain is perhaps the most complex grapefruit sized object in the known universe, with $\mathcal{O}(10^8)$ neurons and $\mathcal{O}(10^{13})$ synapses \cite{??}.   Moreover,  magnetic resonance imaging (MRI) provides access to the living brain at high spatiotemporal resolution, $\sim$$1$ mm$^3$ and $\sim$$1$ Hz.  Yet, after 30 years of well-funded research, there remains to be a single clinically useful brain imaging based biomarker for any psychiatric diagnosis \cite{APA}. 
 % 
@@ -152,13 +153,24 @@ Evidence is building that most psychiatric disorders are fundamentally ``connect
 \textbf{we conjecture that the lack of clinically useful brain imaging biomarkers stems from an absence of adequate statistical models of brain connectivity.} More specifically, both functional and diffusion MRI data can yield estimates of human brain connectivity, or ``connectomes''.  The challenge is to build statistical models linking brain connectivity to phenotype.  Learning such mappings requires overcoming both computational and statistical bottlenecks.
 
 % 
-\textbf{We propose to develop statistical network models specifically for populations of networks. }  This is in stark contrast to nearly all extant models of networks, which typically model a single network (for example, the Facebook network), rather than populations thereof.  While models of populations of other data types are prevalent in neuroscience (such as population activity), we are unaware of any such population models of networks.
+\textbf{We propose to extend and apply our statistical network models specifically for populations of brain networks} \cite{a bunch}.  This is in stark contrast to nearly all other extant models of networks, which typically model a single network (for example, the Facebook network), rather than populations thereof.  While models of populations of other data types are prevalent in neuroscience (such as population activity), we are unaware of any such population models of networks.
 
 
 
 \subsubsection*{Rationale}
 
-Neural coding is a rich field devoted to understanding the relationship between neural \emph{activity} and perception.  By analogy, connectome coding will become a bourgeoning field devoted to understanding the relationship between neural \emph{connectivity} and experience.  Indeed, since the days of Hebb \cite{??}, neuroscientists have conjectured that memories and experiences are stored in the connectivity patterns of the brain.  If the brain stores memories in the physical connections, then it can be free to exhibit whatever pattern it so desires, without fearing a radical reconfiguration of its memories.  On the other hand, if experience is somehow stored in ongoing activity, a sudden change of state (for example, by a seizure), could erase all history, like a etch-a-sketch.   Thus, we are motivated to build and understand models of brain connectivity. 
+\textbf{Neural coding} is a rich field devoted to understanding the relationship between neural \emph{activity} and perception.  By analogy, \textbf{connectome coding} will become a bourgeoning field devoted to understanding the relationship between neural \emph{connectivity} and memory or  experience.  Indeed, since the days of Hebb \cite{??}, neuroscientists have conjectured that memories and experiences are stored in the connectivity patterns of the brain.  If the brain stores memories in the physical connections, then it can be free to exhibit whatever pattern it so desires, without fearing a radical reconfiguration of its memories.  On the other hand, if experience is somehow stored in ongoing activity, a sudden change of state (for example, by a seizure), could erase all history, like a etch-a-sketch.   Thus, we are motivated to build and understand models of brain connectivity. 
+
+% \clearpage
+\paragraph{Aims}
+
+\begin{enumerate}
+	\item \textbf{Extend and apply scalable brain network models to individual brains.}  We have developed and utilized existing single network models to analyze individual brains \cite{??}.  However, in our preliminary work, we have found these models to be inadequate. More specifically, the spectral methods for discovering latent space network models are ineffective for brain networks, possibly due to their sparsity.  Moreover, extent methods utilize a two-step procedure, first spectrally embedding the network, and then clustering the nodes.  We are developing an approach that enables the embedding to incorporate the subsequent clustering step.    
+	\item Models of populations of connectomes
+	\item Models relating populations of connectomes to phenotypes
+\end{enumerate}
+
+
 
 \begin{wrapfigure}{r}{0.42\textwidth}
 %\begin{figure}[htb]
@@ -169,17 +181,13 @@ Neural coding is a rich field devoted to understanding the relationship between 
 %\end{figure}
 \end{wrapfigure}
 
-\clearpage
-\paragraph{Aims}
-
-\begin{enumerate}
-	\item Models of individual connectomes
-	\item Models of populations of connectomes
-	\item Models relating populations of connectomes to phenotypes
-\end{enumerate}
 
 
-
+% \newpage
+% \setcounter{page}{1}
+% \renewcommand\thepage{F-\arabic{page}}
+\bibstyle{alpha}
+\bibliography{pecase}
  
 
 \newpage
@@ -243,11 +251,6 @@ Low-rank matrix completion allows one to estimate a single subspace from incompl
 
  
 
-\newpage
-\setcounter{page}{1}
-\renewcommand\thepage{F-\arabic{page}}
-\bibstyle{alpha}
-\bibliography{pecase}
 
 % that's all folks
 \end{document}
